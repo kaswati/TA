@@ -4,11 +4,14 @@ require('dotenv').config();
 
 // set application environment
 global.ENV = process.env.NODE_ENV || 'development';
+global.async = require('async');
+//bluebird package
+global.bluebird = require("bluebird");
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const express = require('express');
 const fw = express();
-const core = require('./core')(fw);
+const core = require('./core')(fw, __dirname);
 
 core.init(__dirname, 'apps/v1');
 

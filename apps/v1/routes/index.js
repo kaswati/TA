@@ -3,7 +3,6 @@
 module.exports = (app, router) => {
     const MainController = app.controller('main');
 
-    router.use('/coa-types', app.route('coa-type'));
-
+    //router.use('/example', app.route('example'));
     router.get('/', MainController.index);
 };

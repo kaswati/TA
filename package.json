@@ -1,11 +1,11 @@
 {
-  "name": "harmony-starter",
+  "name": "harmony-masterdata",
   "version": "1.0.0",
-  "description": "Starter pack for Harmony project",
+  "description": "Master Data Service",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js --ignore storages --ignore bin --ignore public",
+    "test": "mocha test/*"
   },
   "bin": {
     "harmoni": "bin/index.js"
@@ -16,11 +16,19 @@
   "dependencies": {
     "async": "^2.1.2",
     "body-parser": "^1.15.2",
+    "bluebird": "^3.5.0",
     "dotenv": "^2.0.0",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "mysql": "^2.12.0",
+    "sequelize": "^3.27.0",
+    "sequelize-cli": "^2.4.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "chai-moment": "^0.1.0",
     "mocha": "^3.1.2",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "supertest": "^2.0.1"
   }
 }

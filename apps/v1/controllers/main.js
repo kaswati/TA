@@ -1,5 +1,7 @@
 'use strict';
 
-exports.index = (req, res, next) => {
-    res.success({ status: 'OK' });
-}
+exports.index = bluebird.coroutine(function* (req, res, next) {
+    try{
+        res.success({status: 'OK'});
+    }catch(e) {next(e)}
+})

@@ -1,20 +1,24 @@
 'use strict';
 
 let fn = (fw, rootpath, basepath) => {
-    const path = require('path')
+    const path = require('path');
     const fn = {}
 
+    // attach rootpath and basepath
+    fn.rootpath = rootpath;
+    fn.basepath = basepath;
+
     // set main router
-    fn.router = param => {
+    fn.router = (param) => {
         const router = require('express').Router();
-        
+
         param(fn, router);
-        
+
         fw.use(router);
     }
-    
+
     // require a route file
-    fn.route = routeName => {
+    fn.route = (routeName) => {
         let callback = require(path.normalize(rootpath + '/' + basepath + '/routes/' + routeName.toLowerCase() + '.js'));
 
         const router = require('express').Router();
@@ -25,16 +29,18 @@ let fn = (fw, rootpath, basepath) => {
     }
 
     // require a filter file
-    fn.filter = filterName => {
-        return require(path.normalize(rootpath + '/' + basepath + '/filters/' + filterName.toLowerCase() + '.js'));
-    }
+    fn.filter = (filterName) => require(path.normalize(rootpath + '/' + basepath + '/filters/' + filterName.toLowerCase() + '.js'));
 
     // require a controller file
-    fn.controller = controllerName => {
+    fn.controller = (controllerName) => {
         return require(path.normalize(rootpath + '/' + basepath + '/controllers/' + controllerName.toLowerCase() + '.js'));
     }
 
+    // attach database handling on framework request object
     fw.request.db = fw.db;
+
+    // attach lib function on framework request object
+    global.loadLib = (libName) => require(path.normalize(rootpath + '/' + basepath + '/libs/' + libName.toLowerCase() + '.js'));
 
     return fn;
 }

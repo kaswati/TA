@@ -1,13 +1,14 @@
 'use strict';
 
-let loadMiddlewares = app => {
-    let bodyParser = require('body-parser');
-    
+let loadMiddlewares = (app, rootpath) => {
+    const bodyParser = require('body-parser');
+
     // body parser for json-encoded
     app.use(bodyParser.json({
         // maximum request body size
         // use https://www.npmjs.com/package/bytes as reference for defining byte calculation
-        limit: '100kb'
+        limit: '100kb',
+        'strict': false
     }));
 
     // body parser for url-encoded
@@ -17,13 +18,15 @@ let loadMiddlewares = app => {
         extended: false
     }));
 
+
+
     if (ENV !== 'production') {
         // for environment other than production
         let morgan = require('morgan');
 
         app.use(morgan('dev'));
     } else {
-        // for environment only on production        
+        // for environment only on production
     }
 }
 
