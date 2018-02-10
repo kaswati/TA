@@ -1,7 +1,15 @@
-'use strict'
+"use strict";
 
 module.exports = {
-    // duedate: (model, db) => {
-    //     model.hasMany(db.model('contact_duedate'), {foreignKey: 'duedate_id'});
-    // }
-}
+
+	/**
+	 * tabel category sebagai tabel induk, dan detail sebagai tabel anak
+	 */
+	
+	category: (model, db) => {
+		model.hasMany(db.model("category_detail"), {foreignKey: "category_id"});
+	},
+	category_detail: (model, db) => {
+		model.belongsTo(db.model("category"), {foreignKey: "category_id"});
+	},
+};

@@ -8,7 +8,7 @@ global.async = require('async');
 //bluebird package
 global.bluebird = require("bluebird");
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 const express = require('express');
 const fw = express();
 const core = require('./core')(fw, __dirname);
